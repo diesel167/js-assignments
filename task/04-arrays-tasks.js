@@ -41,7 +41,6 @@ function findElement(arr, value) {
 function generateOdds(len) {
     return new Array(len).fill(0)
         .map((_, i) => 2*i+1);
-
    throw new Error('Not implemented');
 }
 
@@ -58,7 +57,6 @@ function generateOdds(len) {
  *    [] => [] 
  */
 function doubleArray(arr) {
-
    return arr.concat(arr);
    throw new Error('Not implemented');
 }
@@ -214,7 +212,7 @@ function getTail(arr, n) {
  *    +'30,31,32,33,34'
  */
 function toCsvText(arr) {
-
+    return arr.map(elem => elem.join()).join('\n');
    throw new Error('Not implemented');
 }
 
@@ -286,7 +284,7 @@ function getSecondItems(arr) {
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-
+    return arr.reduce((prev,item,i) => prev.concat(Array(i+1).fill(item)),[]);
    throw new Error('Not implemented');
 }
 
@@ -324,7 +322,6 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-
    return arr.filter(num=>typeof num==='number').filter(num=>num>0).length;
     throw new Error('Not implemented');
 }
@@ -343,7 +340,18 @@ function getPositivesCount(arr) {
  *   [ 'one','one','one','zero' ]     => [ 'zero','one','one','one' ]
  */
 function sortDigitNamesByNumericOrder(arr) {
-
+    let numbers = [
+        'one',
+        'two',
+        'three',
+        'four',
+        'five',
+        'six',
+        'seven',
+        'eight',
+        'nine'
+    ];
+    return arr.sort((a, b) => numbers.indexOf(a) - numbers.indexOf(b));
    throw new Error('Not implemented');
 }
 
@@ -380,7 +388,10 @@ function getItemsSum(arr) {
  *  [ null, undefined, NaN, false, 0, '' ]  => 6
  */
 function getFalsyValuesCount(arr) {
-
+   if(arr.length===0){
+      return 0
+   }
+    return arr.filter(num=>num===false||num===''||num===0||num===null||num===undefined||Number.isNaN(num)).length
    throw new Error('Not implemented');
 }
 
@@ -399,7 +410,9 @@ function getFalsyValuesCount(arr) {
  *    [ true, 0, 1, 'true' ], true => 1
  */
 function findAllOccurences(arr, item) {
-
+    let newarr = [];
+    newarr = arr.filter(i => i === item);
+    return newarr.length;
    throw new Error('Not implemented');
 }
 
@@ -591,6 +604,19 @@ function getElementByIndexes(arr, indexes) {
  * 
  */
 function swapHeadAndTail(arr) {
+      if(arr.length===0||arr.length===1){
+         return arr
+      }
+      let head=arr.slice(0,arr.length/2);
+      let tail=arr.slice(-arr.length/2);
+      console.log(tail);
+      if(arr.length%2===0){
+          return tail.concat(head)
+      }
+      else{
+          return tail.concat(arr[Math.ceil(arr.length/2-1)]).concat(head)
+      }
+
     throw new Error('Not implemented');
 }
 
