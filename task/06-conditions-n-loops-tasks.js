@@ -46,6 +46,7 @@ function getFizzBuzz(num) {
  *   10 => 3628800
  */
 function getFactorial(n) {
+    return (n !== 1) ? n * getFactorial(n - 1) : 1;
     throw new Error('Not implemented');
 }
 
@@ -63,6 +64,7 @@ function getFactorial(n) {
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
 function getSumBetweenNumbers(n1, n2) {
+    return (n2 !== n1) ? n2 + getSumBetweenNumbers(n1,n2 - 1) : n1;
     throw new Error('Not implemented');
 }
 
@@ -82,6 +84,12 @@ function getSumBetweenNumbers(n1, n2) {
  *   10,10,10 =>  true
  */
 function isTriangle(a,b,c) {
+    if(a+b<=c||a+c<=b||c+b<=a){
+        return false
+    }
+    else{
+        return true
+    }
     throw new Error('Not implemented');
 }
 
@@ -150,6 +158,13 @@ function doRectanglesOverlap(rect1, rect2) {
  *   
  */
 function isInsideCircle(circle, point) {
+    let p=Math.sqrt(Math.pow(circle.center.x-point.x,2)+Math.pow(circle.center.y-point.y,2));
+    console.log(p);
+    if(p<circle.radius){
+
+        return true
+    }
+    return false
     throw new Error('Not implemented');
 }
 
@@ -166,6 +181,7 @@ function isInsideCircle(circle, point) {
  *   'entente' => null
  */
 function findFirstSingleChar(str) {
+
     throw new Error('Not implemented');
 }
 
@@ -209,6 +225,7 @@ function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
  * 'noon' => 'noon'
  */
 function reverseString(str) {
+    return str.split('').reverse().join('');
     throw new Error('Not implemented');
 }
 
@@ -226,6 +243,8 @@ function reverseString(str) {
  *   34143 => 34143
  */
 function reverseInteger(num) {
+    return Number(String(num).split('').reverse().join(''));
+
     throw new Error('Not implemented');
 }
 
@@ -251,6 +270,7 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(ccn) {
+
     throw new Error('Not implemented');
 }
 
@@ -270,6 +290,7 @@ function isCreditCardNumber(ccn) {
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
 function getDigitalRoot(num) {
+
     throw new Error('Not implemented');
 }
 
@@ -296,6 +317,70 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true 
  */
 function isBracketsBalanced(str) {
+    let bracketsConfig = [['(', ')'], ['[', ']'], ['<','>'],['{','}']];
+    if(str===''){
+        return true
+    }
+    let stack=[];
+    let foundInArr=false;
+    while(true){
+        let firstSymbol='';
+        if(str.length!==0){
+            firstSymbol = str[0];
+        }
+        for(let i=0;i<bracketsConfig.length;i++){
+            if(bracketsConfig[i].indexOf(firstSymbol)===0   ){
+
+                //if || case
+                if(bracketsConfig[i][0]===bracketsConfig[i][1]&&stack[stack.length - 1]===bracketsConfig[i][0]){
+                    stack.pop(); //delete close bracket
+                    str=str.slice(1,str.length); //delete first symbol
+                    foundInArr=true;
+                }
+                else{
+                    stack.push(firstSymbol); //add open bracket
+                    str=str.slice(1,str.length); //delete first symbol
+                    foundInArr=true;
+                }
+            }
+
+            else if(bracketsConfig[i].indexOf(firstSymbol)===1){
+
+
+                //if stack already empty
+                if(stack.length===0){
+                    return false;
+                }
+
+                if(stack[stack.length - 1]===bracketsConfig[i][0]){
+                    stack.pop(); //delete close bracket
+                    str=str.slice(1,str.length); //delete first symbol
+                    foundInArr=true;
+                }
+                //if wrong sequence
+                else{
+                    return false;
+                }
+            }
+
+        }
+        //console.log(stack);
+        //console.log(str);
+        if(foundInArr===false){
+            return false;   //symbol not in the bracketsConfig
+        }
+        foundInArr=false; //reset to default
+
+        //console.log('str='+str);
+        //console.log('stack='+stack);
+        if(str.length===0&&stack.length===0){
+            return true;
+        }
+
+        if((str.length===0&&stack.length!==0)){
+            return false;
+        }
+    }
     throw new Error('Not implemented');
 }
 

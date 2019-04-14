@@ -38,7 +38,7 @@ function getRectangleArea(width, height) {
  *   3.14 => 19.729201864543903
  *   0    => 0
  *   npm test ./test/02-numbers-tasks.js
- *   npm test -- --watch ./test/04-arrays-tests.js
+ *   npm test -- --watch ./test/06-conditions-n-loops-tests.js
  */
 function getCicleCircumference(radius) {
     return 2*Math.PI*radius;
